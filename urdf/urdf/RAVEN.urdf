@@ -202,7 +202,7 @@
   </link>
   <joint
     name="foreArm_pitch"
-    type="fixed">
+    type="revolute">
     <origin
       xyz="-0.22125 0 0"
       rpy="0 0 0" />
@@ -211,6 +211,11 @@
     <child
       link="foreArm_link" />
     <axis
-      xyz="0 0 0" />
+      xyz="0 -1 0" />
+    <limit
+      lower="0"
+      upper="3.14"
+      effort="0"
+      velocity="0" />
   </joint>
 </robot>
