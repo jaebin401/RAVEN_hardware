@@ -88,7 +88,7 @@
     name="shoulder_yaw"
     type="revolute">
     <origin
-      xyz="0 -0.0015 0.1205"
+      xyz="0 0 0.1205"
       rpy="0 0 0" />
     <parent
       link="base_link" />
