@@ -3,5 +3,12 @@
 - RAVEN_abs.urdf에서 abs는 절대경로 의미, 리눅스에서 Rviz2의 launch 를 위한 파일
 
 ## 할일
-- 질량 오버라이딩
+- 질량 오버라이딩: **RAVEN_abs** only completed
 - urdf 버전들 정리 필요 -> 비교후 불필요한 파일 삭제요망
+
+## execute command
+
+```bash
+cd ..
+ros2 launch ~/RAVEN/RAVEN_hardware/urdf/urdf/display.launch.py
+```
