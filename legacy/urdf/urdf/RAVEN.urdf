@@ -8,17 +8,17 @@
     name="base_link">
     <inertial>
       <origin
-        xyz="0.000135180217880393 -1.17644028071497E-06 0.0218654560965951"
+        xyz="0.0001453 -7.3232E-07 0.02219"
         rpy="0 0 0" />
       <mass
-        value="0.24552070353348" />
+        value="0.24946" />
       <inertia
-        ixx="0.000139107176438768"
-        ixy="-1.24417069867494E-08"
-        ixz="-2.86075564744803E-07"
-        iyy="0.000133683116485187"
-        iyz="2.41046355485852E-09"
-        izz="0.000219518135807073" />
+        ixx="0.00014181"
+        ixy="6.28E-09"
+        ixz="-2.6684E-07"
+        iyy="0.00013613"
+        iyz="1.232E-09"
+        izz="0.00022186" />
     </inertial>
     <visual>
       <origin
@@ -31,7 +31,7 @@
       <material
         name="">
         <color
-          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+          rgba="0.75294 0.75294 0.75294 1" />
       </material>
     </visual>
     <collision>
@@ -48,17 +48,17 @@
     name="shoulder_link">
     <inertial>
       <origin
-        xyz="0.000168260272886522 -0.00040845047063651 0.0458708184902644"
+        xyz="0.00016679 0.0012245 -0.023903"
         rpy="0 0 0" />
       <mass
-        value="0.430665397462828" />
+        value="0.4346" />
       <inertia
-        ixx="0.000302813515167828"
-        ixy="2.55071769255206E-10"
-        ixz="2.19436659719587E-07"
-        iyy="0.000384197786303007"
-        iyz="2.48139872627777E-05"
-        izz="0.000387931332540381" />
+        ixx="0.00030526"
+        ixy="-2.0276E-10"
+        ixz="2.2449E-07"
+        iyy="0.00038654"
+        iyz="2.4833E-05"
+        izz="0.00039063" />
     </inertial>
     <visual>
       <origin
@@ -71,7 +71,7 @@
       <material
         name="">
         <color
-          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+          rgba="0.75294 0.75294 0.75294 1" />
       </material>
     </visual>
     <collision>
@@ -85,17 +85,17 @@
     </collision>
   </link>
   <joint
-    name="shoulder_Joint"
+    name="shoulder_yaw"
     type="revolute">
     <origin
-      xyz="0 0 0.0504"
+      xyz="0 0 0.1205"
       rpy="0 0 0" />
     <parent
       link="base_link" />
     <child
       link="shoulder_link" />
     <axis
-      xyz="0 0 1" />
+      xyz="0 0 -1" />
     <limit
       lower="-3.14"
       upper="3.14"
@@ -106,17 +106,17 @@
     name="upperArm_link">
     <inertial>
       <origin
-        xyz="-0.161778684178383 -0.027362923797556 -5.40396077852306E-05"
+        xyz="-0.16504 0.0019744 3.2793E-08"
         rpy="0 0 0" />
       <mass
-        value="0.41988933274855" />
+        value="0.38582" />
       <inertia
-        ixx="0.000235494315900477"
-        ixy="-2.16848804254193E-05"
-        ixz="5.35981963365909E-09"
-        iyy="0.00043094043867717"
-        iyz="-3.73332186967083E-10"
-        izz="0.000420759190691544" />
+        ixx="0.00023872"
+        ixy="-2.5122E-05"
+        ixz="3.1395E-10"
+        iyy="0.00037986"
+        iyz="1.5385E-10"
+        izz="0.00037655" />
     </inertial>
     <visual>
       <origin
@@ -129,7 +129,7 @@
       <material
         name="">
         <color
-          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+          rgba="0.75294 0.75294 0.75294 1" />
       </material>
     </visual>
     <collision>
@@ -143,10 +143,10 @@
     </collision>
   </link>
   <joint
-    name="upperArm_Joint"
+    name="upperArm_pitch"
     type="revolute">
     <origin
-      xyz="0 0.027 0.07"
+      xyz="0 0 0"
       rpy="0 0 0" />
     <parent
       link="shoulder_link" />
@@ -164,17 +164,17 @@
     name="foreArm_link">
     <inertial>
       <origin
-        xyz="0.0326979274237842 -0.0265302108131705 0.0455755672877358"
+        xyz="0.016262 0.0021201 0.041839"
         rpy="0 0 0" />
       <mass
-        value="0.210338139477223" />
+        value="0.16941" />
       <inertia
-        ixx="0.000217945923640569"
-        ixy="-1.09410906733934E-07"
-        ixz="3.59257953883381E-06"
-        iyy="0.000271694167213393"
-        iyz="4.04298660092369E-06"
-        izz="0.000241183247775798" />
+        ixx="0.00021126"
+        ixy="8.6409E-12"
+        ixz="-2.3572E-10"
+        iyy="0.00031247"
+        iyz="3.9576E-06"
+        izz="0.00028419" />
     </inertial>
     <visual>
       <origin
@@ -187,7 +187,7 @@
       <material
         name="">
         <color
-          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+          rgba="0.75294 0.75294 0.75294 1" />
       </material>
     </visual>
     <collision>
@@ -201,10 +201,10 @@
     </collision>
   </link>
   <joint
-    name="foreArm_Joint"
+    name="foreArm_pitch"
     type="revolute">
     <origin
-      xyz="-0.225 -2.5E-05 -7.5E-05"
+      xyz="-0.22125 0 0"
       rpy="0 0 0" />
     <parent
       link="upperArm_link" />
