@@ -1,4 +1,6 @@
-DS_Store
+*.DS_Store
 *.dwg
 
 /legacy
+/docs/urdf_cheatcheet.md
+/docs/urdf_cheatcheet.md
