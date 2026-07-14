@@ -34,19 +34,25 @@ SolidWorks 어셈블리, 3D 프린팅/구매 파트, 그리고 시뮬레이션·
 
 ```
 RAVEN_hardware/
-├── assembly files/                  # SolidWorks 어셈블리 (.SLDASM)
-│   ├── RAVEN_assembly.SLDASM        #   전체 통합 어셈블리
-│   ├── RVN_Base_ASM_v1
-│   ├── RVN_Shoulder_ASM_v1
-│   ├── RVN_UpperArm_ASM_v1
-│   └── RVN_ForeArm_ASM_v1
-├── part files/                      # 단품 파트 (.step / .SLDPRT)
-│   ├── RVN_3DP_*                     #   3D 프린팅 MotorMount · Drive 파트
-│   ├── RVN_BUY_RS02.SLDPRT          #   액추에이터
-│   └── RVN_BUY_*_CarbonTube*        #   카본 튜브 링크
+├── cad/
+│   ├── Link STEP files/             # 링크 단위 STEP (sw2urdf 추출용 중립 포맷)
+│   │   ├── base_link.step
+│   │   ├── Shoulder_link.step
+│   │   ├── UpperArm_link.step
+│   │   └── ForeArm_link.step
+│   └── part files/                  # 개별 파트 (.3mf, 3D 프린팅용)
+│       ├── 000_RVN_3DP_Base_MotorMount_v1
+│       ├── 010_RVN_3DP_Shoulder_MotorMount_v1
+│       ├── 011_RVN_3DP_Shoulder_Drive_v1
+│       ├── 012_RVN_3DP_Shoulder_InnerShaft_v4
+│       ├── 020_RVN_3DP_UpperArm_MotorMount_v2
+│       ├── 021_RVN_3DP_UpperArm_Drive_v3
+│       ├── 030_RVN_3DP_ForeArm_Drive_v1
+│       └── 031_RVN_3DP_ForeArm_EndEffector_v2
 ├── urdf/
 │   ├── meshes/                      # base / shoulder / upperArm / foreArm .STL
-│   └── urdf/                        # RAVEN.urdf, urdf.csv
+│   └── urdf/                        # RAVEN.urdf, RAVEN_assembly_v2.csv
+├── images/
 └── docs/
     └── part_naming_protocol.md      # 파트·어셈블리 네이밍 규칙
 ```
@@ -56,10 +62,11 @@ RAVEN_hardware/
 모든 파트·어셈블리는 [`docs/part_naming_protocol.md`](docs/part_naming_protocol.md)의 규칙을 따릅니다.
 
 ```
-파트:     RVN_(Make)_(Link)_(Function)_v(N)
+파트:     (No.)_RVN_(Make)_(Link)_(Function)_v(N)
 어셈블리:  RVN_(Link)_ASM_v(N)
 ```
 
+- **No.** — 3자리 0-padding, 링크별 10단위 블록 (`Base` 000–009 / `Shoulder` 010–019 / `UpperArm` 020–029 / `ForeArm` 030–039, 6-DOF 확장 대비 040번대부터 예약)
 - **Make** — `3DP`(프린팅) / `BUY`(구매) / `MCH`(가공)
 - **Link** — `Base` / `Shoulder` / `UpperArm` / `ForeArm`
 - 어셈블리명은 sw2urdf 작업 시 URDF `<link>` 이름과 일치시킴
