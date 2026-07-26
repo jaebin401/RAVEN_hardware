@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-  🇰🇷 <a href="https://github.com/jaebin401/RAVEN_hardware/tree/main_KR"><strong>한국어 README는 여기서 확인하세요</strong></a>
+  🇰🇷 <a href="https://github.com/jaebin401/RAVEN_hardware/tree/main-KR"><strong>한국어 README는 여기서 확인하세요</strong></a>
 </p>
 
 > **RAVEN** — Robotic Arm for Venturing into Engineering by uNdergraduate student <br>
