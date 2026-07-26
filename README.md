@@ -5,99 +5,104 @@
   <img src="https://img.shields.io/badge/CAD-AutoDesk%20Fusion-orange" alt="Fusion">
 </p>
 
+<p align="center">
+  🇰🇷 <a href="https://github.com/jaebin401/RAVEN_hardware/tree/main_KR"><strong>한국어 README는 여기서 확인하세요</strong></a>
+</p>
+
 > **RAVEN** — Robotic Arm for Venturing into Engineering by uNdergraduate student <br>
-> 3자유도 로봇 매니퓰레이터의 기구 설계 · CAD · URDF 저장소
+> Mechanical design · CAD · URDF repository for a 3-DOF robotic manipulator
 
 <p align="center">
   <img src="images/RAVEN_thumbnail.png" width="440" alt="RAVEN" />
 </p>
 
-준직접구동(QDD) 액추에이터 기반 3-DOF 로봇 팔 **RAVEN**의 *하드웨어* 리포지토리입니다.<br>
-f3d 모델링 파일, 3D 프린팅 3mf 파일, BOM, 그리고 시뮬레이션·제어용 URDF를 관리합니다.
+This is the *hardware* repository for **RAVEN**, a 3-DOF robotic arm built on quasi-direct-drive (QDD) actuators.<br>
+It manages Fusion 360 (f3d) modeling files, 3D-printing part files (3mf), the BOM, and the URDF used for simulation and control.
 
-> 이 저장소는 **RAVEN** 프로젝트의 하드웨어 파트입니다. 전체 개요와 하위 저장소는 상위(우산) 저장소에서 관리합니다 → **[RAVEN](https://github.com/jaebin401/RAVEN)**
+> This repository is the hardware part of the **RAVEN** project. The overall project overview and its sub-repositories are managed in the umbrella repository → **[RAVEN](https://github.com/jaebin401/RAVEN)**
 
 
-## 사양
+## Specifications
 
-| 항목 | 내용 |
+| Item | Details |
 |---|---|
-| 자유도 | 3-DOF (revolute × 3) |
-| 액추에이터 | Robstride RS02 × 3 (QDD, 피크 17 N·m, 48 V) |
-| 프레임 | 2020 · 3030 알루미늄 프로파일 + 3D 프린팅 마운트 |
-| 상완(UpperArm) | 3030 알루미늄 프로파일 160 mm |
-| 전완(ForeArm) | 2020 알루미늄 프로파일 205 mm (링크 전체 250 mm) |
+| Degrees of freedom | 3-DOF (revolute × 3) |
+| Actuators | Robstride RS02 × 3 (QDD, peak 17 N·m, 48 V) |
+| Frame | 2020 · 3030 aluminum extrusion + 3D-printed mounts |
+| Upper arm | 3030 aluminum extrusion, 160 mm |
+| Forearm | 2020 aluminum extrusion, 205 mm (250 mm overall link length) |
 
-## 운동학 구조
+## Kinematic Structure
 
-`urdf/urdf/RAVEN.urdf` (sw2urdf 추출) 기준:
+Based on `urdf/urdf/RAVEN.urdf` (exported via sw2urdf):
 
-| 조인트 | Parent → Child | 회전축 | 범위 | 동작 |
+| Joint | Parent → Child | Axis | Range | Motion |
 |---|---|---|---|---|
-| `shoulder_Joint` | `base_link` → `shoulder_link` | +Z `(0 0 1)` | −3.14 ~ 3.14 rad | 베이스 요(yaw) |
-| `upperArm_Joint` | `shoulder_link` → `upperArm_link` | +Y `(0 1 0)` | 0 ~ 3.14 rad | 숄더 피치 |
-| `foreArm_Joint` | `upperArm_link` → `foreArm_link` | −Y `(0 -1 0)` | 0 ~ 3.14 rad | 엘보 피치 |
+| `shoulder_Joint` | `base_link` → `shoulder_link` | +Z `(0 0 1)` | −3.14 ~ 3.14 rad | Base yaw |
+| `upperArm_Joint` | `shoulder_link` → `upperArm_link` | +Y `(0 1 0)` | 0 ~ 3.14 rad | Shoulder pitch |
+| `foreArm_Joint` | `upperArm_link` → `foreArm_link` | −Y `(0 -1 0)` | 0 ~ 3.14 rad | Elbow pitch |
 
-- 조인트 오프셋(origin, m): `shoulder` (0, 0, 0.0504) · `upperArm` (0, 0.027, 0.07) · `foreArm` (−0.225, ≈0, ≈0)
-- `effort` / `velocity` 한계값은 URDF에 미입력(0) 상태 — RS02 사양(rated 6 / peak 17 N·m, 무부하 410 rpm) 반영 예정
+- Joint offsets (origin, m): `shoulder` (0, 0, 0.0504) · `upperArm` (0, 0.027, 0.07) · `foreArm` (−0.225, ≈0, ≈0)
+- `effort` / `velocity` limits are currently unset (0) in the URDF — to be filled in from RS02 specs (rated 6 / peak 17 N·m, no-load 410 rpm)
 
-## 디렉토리 구조
+## Directory Structure
 
 ```
 RAVEN_hardware/
 ├── cad/
-│   ├── Link files - .STEP/      # 링크 단위 STEP (sw2urdf용 중립 포맷)
-│   ├── modeling files - .f3d/   # Fusion 360 네이티브 (예정)
-│   └── part files - .3mf/       # 개별 파트 (3D 프린팅용)
+│   ├── Link files - .STEP/      # Per-link STEP files (neutral format for sw2urdf)
+│   ├── modeling files - .f3d/   # Native Fusion 360 files (upcoming)
+│   └── part files - .3mf/       # Individual parts (for 3D printing)
 ├── urdf/
-│   ├── meshes/                  # 링크별 STL
+│   ├── meshes/                  # Per-link STL meshes
 │   └── urdf/                    # RAVEN.urdf + export CSV
-├── docs/                        # 파트 네이밍 프로토콜, ADR(예정)
+├── docs/                        # Part naming protocol, ADRs (upcoming)
 └── images/
-    ├── link image/              # 링크 렌더 이미지
-    └── part image/              # 파트 렌더 이미지
+    ├── link image/              # Link render images
+    └── part image/              # Part render images
 ```
 
-## 파트 네이밍
+## Part Naming
 
-모든 파트·어셈블리는 [`docs/part_naming_protocol.md`](docs/part_naming_protocol.md)의 규칙을 따릅니다.
+All parts and assemblies follow the rules defined in [`docs/part_naming_protocol.md`](docs/part_naming_protocol.md).
 
 ```
-파트:     (No.)_RVN_(Make)_(Link)_(Function)_v(N)
-어셈블리:  RVN_(Link)_ASM_v(N)
+Part:      (No.)_RVN_(Make)_(Link)_(Function)_v(N)
+Assembly:  RVN_(Link)_ASM_v(N)
 ```
 
-- **No.** — 3자리 0-padding, 링크별 10단위 블록 (`Base` 000–009 / `Shoulder` 010–019 / `UpperArm` 020–029 / `ForeArm` 030–039, 6-DOF 확장 대비 040번대부터 예약)
-- **Make** — `3DP`(프린팅) / `BUY`(구매) / `MCH`(가공)
+- **No.** — 3-digit zero-padded, 10-number blocks per link (`Base` 000–009 / `Shoulder` 010–019 / `UpperArm` 020–029 / `ForeArm` 030–039, 040+ reserved for the future 6-DOF expansion)
+- **Make** — `3DP` (printed) / `BUY` (purchased) / `MCH` (machined)
 - **Link** — `Base` / `Shoulder` / `UpperArm` / `ForeArm`
-- 어셈블리명은 sw2urdf 작업 시 URDF `<link>` 이름과 일치시킴
+- Assembly names are matched to the URDF `<link>` names during the sw2urdf workflow
 
-## 관련
+## Related
 
-- 프로젝트 전체(우산) 저장소: **[jaebin401/RAVEN](https://github.com/jaebin401/RAVEN)**
-- 제어·펌웨어(SocketCAN, RS02 MIT 모드 등)는 별도 소프트웨어 리포지토리에서 관리
-- 상위 통합 대상: 휴머노이드 로봇 **QUB**
+- Project umbrella repository: **[jaebin401/RAVEN](https://github.com/jaebin401/RAVEN)**
+- Korean version of this README: **[main_KR branch](https://github.com/jaebin401/RAVEN_hardware/tree/main_KR)**
+- Control/firmware (SocketCAN, RS02 MIT mode, etc.) is managed in a separate software repository
+- Intended for eventual integration into the humanoid robot **QUB**
 
-## 라이선스
+## License
 
-| 대상 | 라이선스 |
+| Scope | License |
 |---|---|
-| 설계 파일 (CAD `.f3d`, STEP, STL, URDF) | [CERN-OHL-S 2.0](LICENSE) |
-| 문서 · 이미지 (README, 네이밍 프로토콜, ADR, `images/*`) | [CC BY 4.0](LICENSE-CC-BY-4.0.txt) |
+| Design files (CAD `.f3d`, STEP, STL, URDF) | [CERN-OHL-S 2.0](LICENSE) |
+| Documentation · images (README, naming protocol, ADRs, `images/*`) | [CC BY 4.0](LICENSE-CC-BY-4.0.txt) |
 
 Copyright © 2026 Jaebin Ahn
 
-설계 파일은 강한 상호주의(strongly reciprocal) 라이선스인 **CERN-OHL-S 2.0**을 따릅니다.
-본 설계를 기반으로 하드웨어를 제작·배포·판매하는 경우, 개선·변경된 설계 소스를 동일 라이선스로 공개해야 합니다.
-CAD 바이너리처럼 파일 자체에 고지를 넣을 수 없는 산출물의 라이선스 고지는 본 문서로 갈음합니다.
+Design files are licensed under **CERN-OHL-S 2.0**, a strongly reciprocal open hardware license.
+If you manufacture, distribute, or sell hardware based on this design, any modified or improved design sources must be released under the same license.
+For artifacts such as CAD binaries where a license notice cannot be embedded in the file itself, this document serves as the license notice.
 
-## 작성자
+## Author
 
 **Jaebin Ahn (jaebin401)**  
-학부 기계공학 전공 / 소프트웨어 부전공  
+Undergraduate, Mechanical Engineering (Software minor)  
 Apple Developer Academy @ POSTECH
 
-목표: 로봇 연구원. 학부 졸업 후 관련분야 대학원 진학 계획.
+Goal: robotics researcher. Planning to pursue graduate studies in the field after undergrad.
 - GitHub: [@jaebin401](https://github.com/jaebin401)
-- Instagram: [통학하는 공대생](https://www.instagram.com/study_4_machine/)
+- Instagram: [@study_4_machine](https://www.instagram.com/study_4_machine/)
 - LinkedIn: [Jaebin Ahn](https://www.linkedin.com/in/jaebin-272ba8366)
