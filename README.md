@@ -1,5 +1,10 @@
 # RAVEN — Hardware
 
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-CERN--OHL--S--2.0-blue" alt="License: CERN-OHL-S 2.0"></a>
+  <img src="https://img.shields.io/badge/CAD-AutoDesk%20Fusion-orange" alt="Fusion">
+</p>
+
 > **RAVEN** — Robotic Arm for Venturing into Engineering by uNdergraduate student <br>
 > 3자유도 로봇 매니퓰레이터의 기구 설계 · CAD · URDF 저장소
 
@@ -9,6 +14,8 @@
 
 준직접구동(QDD) 액추에이터 기반 3-DOF 로봇 팔 **RAVEN**의 *하드웨어* 리포지토리입니다.<br>
 f3d 모델링 파일, 3D 프린팅 3mf 파일, BOM, 그리고 시뮬레이션·제어용 URDF를 관리합니다.
+
+> 이 저장소는 **RAVEN** 프로젝트의 하드웨어 파트입니다. 전체 개요와 하위 저장소는 상위(우산) 저장소에서 관리합니다 → **[jaebin401/RAVEN](https://github.com/jaebin401/RAVEN)**
 
 
 ## 사양
@@ -65,15 +72,9 @@ RAVEN_hardware/
 - **Link** — `Base` / `Shoulder` / `UpperArm` / `ForeArm`
 - 어셈블리명은 sw2urdf 작업 시 URDF `<link>` 이름과 일치시킴
 
-## URDF 파이프라인
-
-1. Fusion 360 에서 설계, 각 파트 step 파일로 export
-2. SolidWorks import, 하위 어셈블리 작성
-3. 총 어셈블리 후 **sw2urdf** 익스포터로 링크·조인트 정의 후 URDF 추출
-4. `meshes/*.STL` + `RAVEN.urdf`
-
 ## 관련
 
+- 프로젝트 전체(우산) 저장소: **[jaebin401/RAVEN](https://github.com/jaebin401/RAVEN)**
 - 제어·펌웨어(SocketCAN, RS02 MIT 모드 등)는 별도 소프트웨어 리포지토리에서 관리
 - 상위 통합 대상: 휴머노이드 로봇 **QUB**
 
@@ -81,7 +82,7 @@ RAVEN_hardware/
 
 | 대상 | 라이선스 |
 |---|---|
-| 설계 파일 (CAD `.f3d`, STEP, STL, URDF, export CSV, 도면 `.dwg`) | [CERN-OHL-S 2.0](LICENSE) |
+| 설계 파일 (CAD `.f3d`, STEP, STL, URDF) | [CERN-OHL-S 2.0](LICENSE) |
 | 문서 · 이미지 (README, 네이밍 프로토콜, ADR, `images/*`) | [CC BY 4.0](LICENSE-CC-BY-4.0.txt) |
 
 Copyright © 2026 Jaebin Ahn
@@ -90,6 +91,13 @@ Copyright © 2026 Jaebin Ahn
 본 설계를 기반으로 하드웨어를 제작·배포·판매하는 경우, 개선·변경된 설계 소스를 동일 라이선스로 공개해야 합니다.
 CAD 바이너리처럼 파일 자체에 고지를 넣을 수 없는 산출물의 라이선스 고지는 본 문서로 갈음합니다.
 
+## 작성자
 
+**Jaebin Ahn (jaebin401)**  
+학부 기계공학 전공 / 소프트웨어 부전공  
+Apple Developer Academy @ POSTECH
 
----
+목표: 로봇 연구원. 학부 졸업 후 관련분야 대학원 진학 계획.
+- GitHub: [@jaebin401](https://github.com/jaebin401)
+- Instagram: [통학하는 공대생](https://www.instagram.com/study_4_machine/)
+- LinkedIn: [Jaebin Ahn](https://www.linkedin.com/in/jaebin-272ba8366)

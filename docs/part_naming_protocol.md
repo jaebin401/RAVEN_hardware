@@ -1,8 +1,8 @@
 # RAVEN Part Naming Protocol
 
 **Project:** RAVEN – Robotic Arm for Venturing into Engineering by uNdergraduate student
-**Version:** 1.1
-**Date:** 2026-05-23
+**Version:** 1.2
+**Date:** 2026-07-26
 
 ---
 
@@ -38,6 +38,7 @@
 - Link, Function은 **PascalCase** (예: `MotorMount`, `BearingHousing`)
 - 버전은 소문자 `v` + 숫자 (예: `v1`, `v2`)
 - 파트 번호는 **3자리** 0-padding (예: `001`, `011`)
+- `.f3d`(Fusion 네이티브 마스터)는 Fusion 클라우드 버전관리를 사용하므로 파일명에서 `v(N)`을 생략한다 (번호·나머지 필드는 유지). 버전 스냅샷은 export 산출물(`.3mf` / `.step`)에만 표기한다
 
 ---
 
