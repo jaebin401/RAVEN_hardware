@@ -1,10 +1,14 @@
 # RAVEN — Hardware
 
-> **RAVEN** — Robotic Arm for Venturing into Engineering by uNdergraduate student
+> **RAVEN** — Robotic Arm for Venturing into Engineering by uNdergraduate student <br>
 > 3자유도 로봇 매니퓰레이터의 기구 설계 · CAD · URDF 저장소
 
-준직접구동(QDD) 액추에이터 기반 3-DOF 로봇 팔 **RAVEN**의 *하드웨어* 리포지토리입니다.
-SolidWorks 어셈블리, 3D 프린팅/구매 파트, 그리고 시뮬레이션·제어용 URDF를 관리합니다.
+<p align="center">
+  <img src="images/RAVEN_thumbnail.png" width="440" alt="RAVEN" />
+</p>
+
+준직접구동(QDD) 액추에이터 기반 3-DOF 로봇 팔 **RAVEN**의 *하드웨어* 리포지토리입니다.<br>
+f3d 모델링 파일, 3D 프린팅 3mf 파일, BOM, 그리고 시뮬레이션·제어용 URDF를 관리합니다.
 
 
 ## 사양
@@ -13,9 +17,9 @@ SolidWorks 어셈블리, 3D 프린팅/구매 파트, 그리고 시뮬레이션·
 |---|---|
 | 자유도 | 3-DOF (revolute × 3) |
 | 액추에이터 | Robstride RS02 × 3 (QDD, 피크 17 N·m, 48 V) |
-| 프레임 | 30×30 mm 카본 파이버 각관(2 mm 두께) + 3D 프린팅 마운트 |
-| 상완(UpperArm) | 카본 튜브 160 mm — `RVN_BUY_UpperArm_CarbonTube160` |
-| 전완(ForeArm) | 카본 튜브 250 mm — `RVN_BUY_ForeArm_CarbonTube250` |
+| 프레임 | 2020 · 3030 알루미늄 프로파일 + 3D 프린팅 마운트 |
+| 상완(UpperArm) | 3030 알루미늄 프로파일 160 mm |
+| 전완(ForeArm) | 2020 알루미늄 프로파일 205 mm (링크 전체 250 mm) |
 
 ## 운동학 구조
 
@@ -23,38 +27,28 @@ SolidWorks 어셈블리, 3D 프린팅/구매 파트, 그리고 시뮬레이션·
 
 | 조인트 | Parent → Child | 회전축 | 범위 | 동작 |
 |---|---|---|---|---|
-| `shoulder_yaw` | `base_link` → `shoulder_link` | Z (−1) | ±180° | 베이스 요(yaw) |
-| `upperArm_pitch` | `shoulder_link` → `upperArm_link` | Y (+1) | 0 ~ 180° | 숄더 피치 |
-| `foreArm_pitch` | `upperArm_link` → `foreArm_link` | Y (−1) | 0 ~ 180° | 엘보 피치 |
+| `shoulder_Joint` | `base_link` → `shoulder_link` | +Z `(0 0 1)` | −3.14 ~ 3.14 rad | 베이스 요(yaw) |
+| `upperArm_Joint` | `shoulder_link` → `upperArm_link` | +Y `(0 1 0)` | 0 ~ 3.14 rad | 숄더 피치 |
+| `foreArm_Joint` | `upperArm_link` → `foreArm_link` | −Y `(0 -1 0)` | 0 ~ 3.14 rad | 엘보 피치 |
 
-- 조인트 오프셋: `base → shoulder` z = 120.5 mm, `upperArm → foreArm` x = 221.25 mm
-- `effort` / `velocity` 한계값은 미입력(0) 상태 — RS02 사양 반영 예정
+- 조인트 오프셋(origin, m): `shoulder` (0, 0, 0.0504) · `upperArm` (0, 0.027, 0.07) · `foreArm` (−0.225, ≈0, ≈0)
+- `effort` / `velocity` 한계값은 URDF에 미입력(0) 상태 — RS02 사양(rated 6 / peak 17 N·m, 무부하 410 rpm) 반영 예정
 
 ## 디렉토리 구조
 
 ```
 RAVEN_hardware/
 ├── cad/
-│   ├── Link STEP files/             # 링크 단위 STEP (sw2urdf 추출용 중립 포맷)
-│   │   ├── base_link.step
-│   │   ├── Shoulder_link.step
-│   │   ├── UpperArm_link.step
-│   │   └── ForeArm_link.step
-│   └── part files/                  # 개별 파트 (.3mf, 3D 프린팅용)
-│       ├── 000_RVN_3DP_Base_MotorMount_v1
-│       ├── 010_RVN_3DP_Shoulder_MotorMount_v1
-│       ├── 011_RVN_3DP_Shoulder_Drive_v1
-│       ├── 012_RVN_3DP_Shoulder_InnerShaft_v4
-│       ├── 020_RVN_3DP_UpperArm_MotorMount_v2
-│       ├── 021_RVN_3DP_UpperArm_Drive_v3
-│       ├── 030_RVN_3DP_ForeArm_Drive_v1
-│       └── 031_RVN_3DP_ForeArm_EndEffector_v2
+│   ├── Link files - .STEP/      # 링크 단위 STEP (sw2urdf용 중립 포맷)
+│   ├── modeling files - .f3d/   # Fusion 360 네이티브 (예정)
+│   └── part files - .3mf/       # 개별 파트 (3D 프린팅용)
 ├── urdf/
-│   ├── meshes/                      # base / shoulder / upperArm / foreArm .STL
-│   └── urdf/                        # RAVEN.urdf, RAVEN_assembly_v2.csv
-├── images/
-└── docs/
-    └── part_naming_protocol.md      # 파트·어셈블리 네이밍 규칙
+│   ├── meshes/                  # 링크별 STL
+│   └── urdf/                    # RAVEN.urdf + export CSV
+├── docs/                        # 파트 네이밍 프로토콜, ADR(예정)
+└── images/
+    ├── link image/              # 링크 렌더 이미지
+    └── part image/              # 파트 렌더 이미지
 ```
 
 ## 파트 네이밍
@@ -76,10 +70,26 @@ RAVEN_hardware/
 1. Fusion 360 에서 설계, 각 파트 step 파일로 export
 2. SolidWorks import, 하위 어셈블리 작성
 3. 총 어셈블리 후 **sw2urdf** 익스포터로 링크·조인트 정의 후 URDF 추출
-4. `meshes/*.STL` + `RAVEN.urdf` 
+4. `meshes/*.STL` + `RAVEN.urdf`
 
 ## 관련
 
 - 제어·펌웨어(SocketCAN, RS02 MIT 모드 등)는 별도 소프트웨어 리포지토리에서 관리
 - 상위 통합 대상: 휴머노이드 로봇 **QUB**
 
+## 라이선스
+
+| 대상 | 라이선스 |
+|---|---|
+| 설계 파일 (CAD `.f3d`, STEP, STL, URDF, export CSV, 도면 `.dwg`) | [CERN-OHL-S 2.0](LICENSE) |
+| 문서 · 이미지 (README, 네이밍 프로토콜, ADR, `images/*`) | [CC BY 4.0](LICENSE-CC-BY-4.0.txt) |
+
+Copyright © 2026 Jaebin Ahn
+
+설계 파일은 강한 상호주의(strongly reciprocal) 라이선스인 **CERN-OHL-S 2.0**을 따릅니다.
+본 설계를 기반으로 하드웨어를 제작·배포·판매하는 경우, 개선·변경된 설계 소스를 동일 라이선스로 공개해야 합니다.
+CAD 바이너리처럼 파일 자체에 고지를 넣을 수 없는 산출물의 라이선스 고지는 본 문서로 갈음합니다.
+
+
+
+---

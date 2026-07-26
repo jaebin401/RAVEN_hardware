@@ -2,5 +2,3 @@
 *.dwg
 
 /legacy
-/docs/urdf_cheatsheet.md
-/docs/urdf_notes.md

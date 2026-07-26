@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  RAVEN - 3-DOF Robotic Manipulator (hardware description)
+  Copyright (c) 2026 Jaebin Ahn
+  SPDX-License-Identifier: CERN-OHL-S-2.0
+  Licensed under CERN-OHL-S v2. Source: https://ohwr.org/cern_ohl_s_v2.txt
+-->
 <!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
      Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
